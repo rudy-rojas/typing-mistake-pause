@@ -1,0 +1,30 @@
+# Ignore compiled Python files
+*.pyc
+
+# Ignore virtual environment
+venv/
+
+# Ignore user-specific settings
+*.ini
+
+# Ignore compiled files
+*.class
+*.jar
+
+# Ignore log files
+*.log
+
+# Ignore compiled resources
+*.class
+*.jar
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore files generated during testing
+__pycache__/
+.coverage
+htmlcov/
+
+# Ignore environment-specific files
+.env
