@@ -23,7 +23,7 @@ function disableTempKeydownHandler() {
     document.removeEventListener('keydown', keydownHandler);
     setTimeout(function () {
       document.addEventListener('keydown', keydownHandler);
-    }, time_pause); // 3000 milisegundos = 3 segundos
+    }, time_pause); // 1200 miliseconds = 1.2 seconds
 }
 
 

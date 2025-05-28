@@ -28,12 +28,6 @@ function disableTempPanel() {
     //index++;
   });
 
-
-  // var valueDataEaseOriginals = [];
-  // buttonsAns.each(function () {
-  //   valueDataEaseOriginals.push($(this).attr('data-ease'));
-  // });
-
   // Disable the buttonsAns and change the background opacity
   buttonsAns.prop('disabled', true).each(function (index) {
     var boton = $(this);
@@ -58,5 +52,5 @@ function disableTempPanel() {
       boton.css('background-color', originalColors[index]);
 
     });
-  }, time_pause); // 3000 milisegundos = 3 segundos
+  }, time_pause); // 1200 miliseconds = 1.2 seconds
 }

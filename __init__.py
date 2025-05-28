@@ -3,6 +3,8 @@ from typing import TYPE_CHECKING, Any, Union
 
 from aqt import gui_hooks, mw
 from aqt.reviewer import Reviewer, ReviewerBottomBar
+from aqt.qt import QAction
+from aqt.utils import showInfo
 
 # from aqt.utils import showInfo
 if TYPE_CHECKING:
@@ -55,5 +57,53 @@ def init_addon(card) -> None:
     else:
         mw.reviewer.web.eval("document.addEventListener('keydown', keydownHandler);")
 
+
+def show_plugin_about():
+    """Shows information about the plugin"""
+    info_text = """
+    <h3>Typing Mistake Pause</h3>
+    <p><b>Version:</b> 1.0</p>
+    <p><b>Description:</b> Temporarily pauses answer buttons when you type an incorrect answer, giving you time to reflect on your mistake.</p>
+    
+    <h4>Features:</h4>
+    <ul>
+        <li>{time_pause}ms pause when answer is incorrect</li>
+        <li>Keyboard shortcuts: {again} (Again), {hard} (Hard), {good} (Good), {easy} (Easy)</li>
+        <li>Buttons are temporarily disabled to prevent rushed responses</li>
+    </ul>
+    
+    <h4>Current Settings:</h4>
+    <ul>
+        <li><b>Pause Time:</b> {time_pause} milliseconds</li>
+        <li><b>Again Key:</b> {again}</li>
+        <li><b>Hard Key:</b> {hard}</li>
+        <li><b>Good Key:</b> {good}</li>
+        <li><b>Easy Key:</b> {easy}</li>
+    </ul>
+    """.format(
+        time_pause=TIME_PAUSE,
+        again=AGAIN_OPTION,
+        hard=HARD_OPTION,
+        good=GOOD_OPTION,
+        easy=EASY_OPTION
+    )
+    
+    showInfo(info_text, title="Typing Mistake Pause - Information")
+
+def setup_menu():
+    """Sets up the plugin menu"""
+    if mw is None:
+        return
+    
+    # Create menu action
+    action = QAction("Typing Mistake Pause", mw)
+    action.triggered.connect(show_plugin_about)
+    
+    # Add to Tools menu
+    mw.form.menuTools.addAction(action)
+
 gui_hooks.webview_will_set_content.append(on_webview_will_set_content)
 gui_hooks.reviewer_did_show_answer.append(init_addon)
+
+# Setup menu when Anki is ready
+gui_hooks.main_window_did_init.append(setup_menu)
