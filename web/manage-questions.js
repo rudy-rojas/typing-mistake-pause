@@ -1,9 +1,16 @@
 function setEscapeTypeCorrect(typeCorrect) {
     setTimeout(function() {
-        var el = document.querySelector('#typeans .typeGood');
-        if (el) {
-            el.innerText = typeCorrect;
-        }
+        // var el = document.querySelector('#typeans .typeGood');
+        // if (el) {
+        //     el.innerText = typeCorrect;
+        // }
+
+        var el = document.getElementById('typeans');
+        el.innerText = '';
+        var span = document.createElement('span');
+        span.className = 'typeGood';
+        span.innerText = typeCorrect;
+        el.appendChild(span);
     }, 100);
 }
 
