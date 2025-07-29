@@ -50,9 +50,12 @@ def on_webview_will_set_content(
 
 
 def init_addon(card) -> None:
-    typeCorrect = html.unescape(mw.reviewer.typeCorrect.lower())
-    typedAnswer = html.unescape(mw.reviewer.typedAnswer.lower())
-    typeCorrectUnescape = html.unescape(mw.reviewer.typedAnswer)
+    # typeCorrect = html.unescape(mw.reviewer.typeCorrect.lower())
+    typeCorrect = html.unescape(mw.reviewer.typeCorrect)
+    # typedAnswer = html.unescape(mw.reviewer.typedAnswer.lower())
+    typedAnswer = html.unescape(mw.reviewer.typedAnswer)
+    # typeCorrectUnescape = html.unescape(mw.reviewer.typedAnswer)
+    typeCorrectUnescape = mw.reviewer.typedAnswer
     if typedAnswer != typeCorrect and typedAnswer != "":
         mw.reviewer.bottom.web.eval("disableTempPanel();") 
         mw.reviewer.web.eval("disableTempKeydownHandler();")
@@ -60,6 +63,8 @@ def init_addon(card) -> None:
         mw.reviewer.web.eval("document.addEventListener('keydown', keydownHandler);")
         mw.reviewer.web.eval(f'setEscapeTypeCorrect({json.dumps(typeCorrectUnescape)});') # uncomment: import json
         # mw.reviewer.web.eval(f'setEscapeTypeCorrect("{typeCorrect}");')
+
+
 
 # Older Anki versions
 # def init_addon(card) -> None:
