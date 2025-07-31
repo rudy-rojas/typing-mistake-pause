@@ -56,15 +56,17 @@ def init_addon(card) -> None:
     typedAnswer = html.unescape(mw.reviewer.typedAnswer)
     # typeCorrectUnescape = html.unescape(mw.reviewer.typedAnswer)
     typeCorrectUnescape = mw.reviewer.typedAnswer
-    if typedAnswer != typeCorrect and typedAnswer != "":
-        mw.reviewer.bottom.web.eval("disableTempPanel();") 
-        mw.reviewer.web.eval("disableTempKeydownHandler();")
-    else:
+    # if typedAnswer == typeCorrect and typedAnswer != "":
+    if typedAnswer == typeCorrect:
         mw.reviewer.web.eval("document.addEventListener('keydown', keydownHandler);")
         mw.reviewer.web.eval(f'setEscapeTypeCorrect({json.dumps(typeCorrectUnescape)});') # uncomment: import json
         # mw.reviewer.web.eval(f'setEscapeTypeCorrect("{typeCorrect}");')
-
-
+    elif typeCorrect.lower() != typedAnswer.lower():
+        mw.reviewer.bottom.web.eval("disableTempPanel();")
+        mw.reviewer.web.eval("disableTempKeydownHandler();")
+    else:
+        mw.reviewer.web.eval("document.addEventListener('keydown', keydownHandler);")
+        # mw.reviewer.web.eval(f'setEscapeTypeCorrect({json.dumps(typeCorrectUnescape)});')
 
 # Older Anki versions
 # def init_addon(card) -> None:
